@@ -1,7 +1,7 @@
 
 class MindMap {
     title: string;
-    map: Map<number, MapNode>;
+    nodes: [MapNode];
 
     node_count: number;
 
@@ -13,7 +13,7 @@ class MindMap {
     }
 
     add_node(node: MapNode) {
-        this.map[node.id] = node
+        this.nodes.push(node);
         this.node_count++;
         for (let i: number = 0; i < this.adj_mat.length; ++i) {
             this.adj_mat[i].push(0);
@@ -28,6 +28,20 @@ class MindMap {
         new_mat[from] = -1;
         new_mat[to] = 1;
         this.adj_mat.push(new_mat);
+    }
+
+    cut_connection(from: number, to: number) {
+        let new_mat: [number];
+        for(let i = 0; i < this.node_count; ++i) {
+            new_mat.push(0);
+        }
+        new_mat[from] = -1;
+        new_mat[to] = 1;
+        for (let i = 0; i < this.adj_mat.length; ++i) {
+            if (this.adj_mat[i] == new_mat) {
+                this.adj_mat.splice(i)
+            }
+        }
     }
 }
 
