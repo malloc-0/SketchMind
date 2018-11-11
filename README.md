@@ -1,5 +1,5 @@
 <div align=center>
-    <img width="150" height="150" src="https://raw.githubusercontent.com/yuxiqian/SketchMind/master/SketchMind.Resources/Icons/Main_300_300.png"/>
+    <img width="150" height="150" src="https://raw.githubusercontent.com/malloc-0/SketchMind/master/SketchMind.Resources/Icons/Main_300_300.png"/>
 </div>
 
 # SketchMind
