@@ -1,6 +1,9 @@
+"use strict";
 // struct.ts
+exports.__esModule = true;
 // This file contains basic data structures used in nodes and maps.
 // Copyright (c) 2018 "malloc(0)" Group. All rights reserved.
+var utils = require("./utils");
 var Color = /** @class */ (function () {
     function Color(r, g, b) {
         this.r = r;
@@ -27,16 +30,19 @@ var Size;
 ;
 var MapNode = /** @class */ (function () {
     function MapNode(cont, size) {
+        // 内容。
+        this.expand_right = true;
         MapNode.last_id++;
         this.id = MapNode.last_id;
         this.content = cont;
         this.size = size;
+        this.parent_id = -1;
     }
     MapNode.last_id = 0;
     return MapNode;
 }());
 var MindMap = /** @class */ (function () {
-    // 表示指向关系的邻接矩阵
+    // 确定整体主题色。
     function MindMap(title) {
         this.title = title;
         this.node_count = 0;
@@ -78,6 +84,7 @@ var MindMap = /** @class */ (function () {
         // 设置 -1 1 表示指向关系
         this.adj_mat.push(new_mat);
         // 把新的边推入矩阵
+        this.nodes[to].parent_id = this.nodes[from].id;
     };
     MindMap.prototype.cut_connection = function (from, to) {
         var new_mat;
@@ -93,6 +100,40 @@ var MindMap = /** @class */ (function () {
                 // 找到符合条件的就删除整行
             }
         }
+        this.nodes[to].parent_id = -1;
+    };
+    MindMap.prototype.generate_minddata = function () {
+        var mind = {
+            /* 元数据，定义思维导图的名称、作者、版本等信息 */
+            "meta": {
+                "name": this.title,
+                "author": "malloc(0)",
+                "version": utils.VERSION
+            },
+            /* 数据格式声明 */
+            "format": "node_array",
+            /* 数据内容 */
+            "data": []
+        };
+        for (var _i = 0, _a = this.nodes; _i < _a.length; _i++) {
+            var node = _a[_i];
+            if (node.parent_id == -1) {
+                // 是根节点。开始往里扔
+                mind["data"].push({
+                    "id": node.id.toString(),
+                    "isroot": true,
+                    "topic": node.content
+                });
+            }
+            else {
+                mind["data"].push({
+                    "id": node.id.toString(),
+                    "parentid": node.parent_id.toString(),
+                    "topic": node.content
+                });
+            }
+        }
+        return mind;
     };
     return MindMap;
 }());

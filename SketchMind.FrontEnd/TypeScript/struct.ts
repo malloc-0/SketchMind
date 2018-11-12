@@ -4,6 +4,8 @@
 
 // Copyright (c) 2018 "malloc(0)" Group. All rights reserved.
 
+import * as utils from "./utils";
+
 class Color {
     r: number;
     g: number;
@@ -36,19 +38,24 @@ class MapNode {
     id: number;
     // 每个节点的 id。
 
-    content: [string];
-    // 内容。多点内容以数组形式存储。
+    parent_id: number;
+    // 父节点的 id。根节点的 parent_id 设置为 0。
 
-    color: Color;
-    // 这一块儿的颜色
+    content: string;
+    // 内容。
+
+    expand_right: boolean = true;
+    // 是否向右展开。默认为 yes。
+    // 目前不想用它
 
     size: Size;
 
-    constructor (cont: [string], size: Size) {
+    constructor (cont: string, size: Size) {
         MapNode.last_id++;
         this.id = MapNode.last_id;
         this.content = cont;
         this.size = size;
+        this.parent_id = -1;
     }
     // 构造器。传入节点的内容（数组形式）
 }
@@ -67,6 +74,9 @@ class MindMap {
 
     adj_mat: Array<Array<number>>;
     // 表示指向关系的邻接矩阵
+
+    accent: Color;
+    // 确定整体主题色。
 
     constructor(title: string) {
         this.title = title;
@@ -114,6 +124,8 @@ class MindMap {
 
         this.adj_mat.push(new_mat);
         // 把新的边推入矩阵
+
+        this.nodes[to].parent_id = this.nodes[from].id;
     }
 
     cut_connection(from: number, to: number) {
@@ -131,6 +143,39 @@ class MindMap {
                 // 找到符合条件的就删除整行
             }
         }
+        this.nodes[to].parent_id = -1;
+    }
+
+    generate_minddata() {
+        let mind = {
+            /* 元数据，定义思维导图的名称、作者、版本等信息 */
+            "meta":{
+                "name": this.title,
+                "author": "malloc(0)",
+                "version": utils.VERSION,
+            },
+            /* 数据格式声明 */
+            "format": "node_array",
+            /* 数据内容 */
+            "data": []
+        };
+
+        for (let node of this.nodes) {
+            if (node.parent_id == -1) {
+                // 是根节点。开始往里扔
+                mind["data"].push({
+                    "id": node.id.toString(),
+                    "isroot": true,
+                    "topic": node.content,
+                })
+            } else {
+                mind["data"].push({
+                    "id": node.id.toString(),
+                    "parentid": node.parent_id.toString(),
+                    "topic": node.content,
+                })
+            }
+        }
+        return mind;
     }
 }
-
