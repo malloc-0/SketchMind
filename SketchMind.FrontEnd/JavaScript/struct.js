@@ -135,5 +135,8 @@ var MindMap = /** @class */ (function () {
         }
         return mind;
     };
+    MindMap.prototype.get_example_minddata = function () {
+        return utils.EXAMPLE_MIND;
+    };
     return MindMap;
 }());

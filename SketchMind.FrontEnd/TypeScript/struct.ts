@@ -178,4 +178,8 @@ class MindMap {
         }
         return mind;
     }
+
+    get_example_minddata() {
+        return utils.EXAMPLE_MIND;
+    }
 }
