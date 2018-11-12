@@ -1,9 +1,36 @@
+// struct.ts
+// This file contains basic data structures used in nodes and maps.
+// Copyright (c) 2018 "malloc(0)" Group. All rights reserved.
+var Color = /** @class */ (function () {
+    function Color(r, g, b) {
+        this.r = r;
+        this.g = g;
+        this.b = b;
+    }
+    Color.prototype.to_hex = function (i) {
+        var s = i.toString(16);
+        if (s.length == 1) {
+            s = "0" + s;
+        }
+    };
+    Color.prototype.print_hex = function () {
+        return "0x" + this.to_hex(this.r) + this.to_hex(this.g) + this.to_hex(this.b);
+    };
+    return Color;
+}());
+var Size;
+(function (Size) {
+    Size[Size["small"] = 0] = "small";
+    Size[Size["medium"] = 1] = "medium";
+    Size[Size["large"] = 2] = "large";
+})(Size || (Size = {}));
+;
 var MapNode = /** @class */ (function () {
-    // 内容。多点内容以数组形式存储。
-    function MapNode(cont) {
+    function MapNode(cont, size) {
         MapNode.last_id++;
         this.id = MapNode.last_id;
         this.content = cont;
+        this.size = size;
     }
     MapNode.last_id = 0;
     return MapNode;

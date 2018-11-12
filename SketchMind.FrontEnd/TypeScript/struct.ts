@@ -1,3 +1,33 @@
+// struct.ts
+
+// This file contains basic data structures used in nodes and maps.
+
+// Copyright (c) 2018 "malloc(0)" Group. All rights reserved.
+
+class Color {
+    r: number;
+    g: number;
+    b: number;
+
+    constructor(r: number, g: number, b: number) {
+        this.r = r;
+        this.g = g;
+        this.b = b;
+    }
+
+    to_hex(i: number) {
+        let s = i.toString(16);
+        if (s.length == 1) {
+            s = "0" + s;
+        }
+    }
+
+    print_hex() {
+        return "0x" + this.to_hex(this.r) + this.to_hex(this.g) + this.to_hex(this.b); 
+    }
+}
+
+enum Size { small, medium, large };
 
 class MapNode {
     static last_id: number = 0;
@@ -9,10 +39,16 @@ class MapNode {
     content: [string];
     // 内容。多点内容以数组形式存储。
 
-    constructor (cont: [string]) {
+    color: Color;
+    // 这一块儿的颜色
+
+    size: Size;
+
+    constructor (cont: [string], size: Size) {
         MapNode.last_id++;
         this.id = MapNode.last_id;
         this.content = cont;
+        this.size = size;
     }
     // 构造器。传入节点的内容（数组形式）
 }
