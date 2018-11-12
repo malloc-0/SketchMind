@@ -29,7 +29,25 @@ class Color {
     }
 }
 
-enum Size { small, medium, large };
+
+enum Style {
+    "primary",
+    "warning",
+    "danger",
+    "success",
+    "info",
+    "greensea",
+    "nephrite",
+    "belizehole",
+    "wisteria",
+    "asphalt",
+    "orange",
+    "pumpkin",
+    "pomegranate",
+    "clouds",
+    "asbestos",
+}
+
 
 class MapNode {
     static last_id: number = 0;
@@ -48,13 +66,11 @@ class MapNode {
     // 是否向右展开。默认为 yes。
     // 目前不想用它
 
-    size: Size;
 
-    constructor (cont: string, size: Size) {
+    constructor (cont: string) {
         MapNode.last_id++;
         this.id = MapNode.last_id;
         this.content = cont;
-        this.size = size;
         this.parent_id = -1;
     }
     // 构造器。传入节点的内容（数组形式）
