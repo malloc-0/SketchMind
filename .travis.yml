@@ -7,4 +7,5 @@ node_js:
 before_script:
   - npm install materialize-css@next jsmind
 
-script: gulp
+script: 
+  - npm run build
