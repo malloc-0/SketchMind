@@ -3,6 +3,9 @@
 .AppleDouble
 .LSOverride
 
+# VS Code
+.vscode
+
 # C extensions
 *.so
 
