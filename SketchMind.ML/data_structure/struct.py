@@ -3,6 +3,8 @@
 import const
 import json
 
+import const
+
 
 class MapNode:
 
@@ -67,8 +69,8 @@ class MindMap:
 
     def add_connection(self, from_where, to_where):
         new_mat = []
-        for i in self.nodes:
-            new_mat.push(0)
+        for _ in self.nodes:
+            new_mat.append(0)
         # 边矩阵里加入一个全 0 列
 
         new_mat[from_where] = -1
@@ -78,30 +80,30 @@ class MindMap:
         self.adj_mat.append(new_mat)
         # 把新的边推入矩阵
 
-        self.nodes[to].parent_id = self.nodes[from].id
+        self.nodes[to_where].parent_id = self.nodes[from_where].id
 
-    def cut_connection(self, from_where, to_where) {
+    def cut_connection(self, from_where, to_where):
         new_mat = []
-        for i in self.nodes:
-            new_mat.push(0)
+        for _ in self.nodes:
+            new_mat.append(0)
 
         new_mat[from_where] = -1
         new_mat[to_where] = 1
         # 构造出 connection 的矩阵表示
 
-        for i in self.adj_mat
+        for i in self.adj_mat:
             if (self.adj_mat[i] == new_mat):
                 self.adj_mat.remove(i)
 
-        self.nodes[to].parent_id = -1
+        self.nodes[to_where].parent_id = -1
 
-        def generate_minddata():
+    def generate_minddata(self):
         mind = {
             # 元数据，定义思维导图的名称、作者、版本等信息
             "meta": {
-                "name": this.title,
+                "name": self.title,
                 "author": "malloc(0)",
-                "version": utils.VERSION,
+                "version": const.VERSION,
             },
             # 数据格式声明
             "format": "node_array",
@@ -109,23 +111,25 @@ class MindMap:
             "data": []
         }
 
-        for node in this.nodes:
+        for node in self.nodes:
             if (node.parent_id == -1):
                 # 是根节点。开始往里扔
                 mind["data"].append({
                     "id": str(node.id),
-                    "isroot": true,
+                    "isroot": True,
                     "topic": node.content,
                 })
             else:
                 # 不是根节点。要设置爹
-                mind["data"].push({
+                mind["data"].append({
                     "id": str(node.id),
                     "parentid": str(node.parent_id),
                     "topic": node.content,
                 })
 
-        return json.dump(mind)
+        fp = open("result.json", "w")
 
-        def get_example_minddata(self):
-            return const.EXAMPLE_MIND
+        return json.dump(mind, fp)
+
+    def get_example_minddata(self):
+        return const.EXAMPLE_MIND
