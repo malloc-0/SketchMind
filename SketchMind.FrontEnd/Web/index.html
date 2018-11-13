@@ -20,20 +20,8 @@
         <div class="container"><a href="#" data-target="nav-mobile" class="top-nav sidenav-trigger waves-effect waves-teal"><i
                     class="material-icons">menu</i></a></div>
         <ul id="nav-mobile" class="sidenav sidenav-fixed">
-            <li class="bold"><a href="" class="collapsible-header waves-effect waves-cyan">开始</a></li>
-            <li class="no-padding">
-                <ul class="collapsible collapsible-accordion">
-                    <li class="bold"><a class="collapsible-header waves-effect waves-cyan">编辑</a>
-                        <div class="collapsible-body">
-                            <ul>
-                                <li><a href="">添加节点</a></li>
-                                <li><a href="">删除节点</a></li>
-                                <li><a href="">重置状态</a></li>
-                            </ul>
-                        </div>
-                    </li>
-                </ul>
-            </li>
+            <li class="bold"><a onclick="switchTab(0)" class="collapsible-header waves-effect waves-cyan">开始</a></li>
+            <li class="bold"><a onclick="switchTab(1)" class="collapsible-header waves-effect waves-cyan">编辑</a></li>
             <li class="no-padding">
                 <ul class="collapsible collapsible-accordion">
                     <li class="bold"><a class="collapsible-header waves-effect waves-cyan">输出</a>
@@ -48,26 +36,35 @@
                 </ul>
             </li>
             <!--<li class="bold"><a href="" class="collapsible-header waves-effect waves-cyan">关于<span data-badge-caption="v0.1.0" class="new badge blue-grey"></span></a></li>-->
-            <li class="logo"><a id="logo-container" href="" class="collapsible-header">关于<span data-badge-caption="v0.1.0" class="new badge blue-grey"></span>
+            <li class="logo"><a id="logo-container" onclick="switchTab(2)" class="collapsible-header">关于<span data-badge-caption="v0.1.0" class="new badge blue-grey"></span>
                 <img src="res/img/Main_300_300.png" width="100" height="100">
             </a></li>
         </ul>
+        <style>
+            html,body,iframe{width: 100%;height: 100%;padding: 0;margin: 0}
+            #start{width: 100%;height: 100%;}
+            #edit{width: 100%;height: 100%;}
+            #about{width: 100%;height: 100%;}
+            iframe{border: none;}
+        </style>
     </header>
     <main>
-
-        <div class="section" id="index-banner">
-            <div class="container">
-                <!--  Outer row  -->
-                <div class="row">
-                    <div class="section col s12 m8 offset-m1 xl7 offset-xl1"><div class="container">
-                        <div class="row">
-                            <div class="col left">
-                                <h1 class="header">项目简介</h1>
-
-                                    <p class="grey-text-darken-1">将手绘思维导图轻松地转化为电子稿，稍作调整即可输出成品。</p>
-                                    <a class="waves-effect waves-light blue-grey btn">OK</a>
-                                 </div>
+        <div class="container">
+            <div class="row">
+                <div class="col s12 m8 offset-m2">
+                    <div class="one" id="tab0" style="display:block">
+                            <div id="start">
+                                <iframe src="frame/start.html"></iframe>
                             </div>
+                    </div>
+                    <div class="one" id="tab1" style="display:none">
+                        <div id="edit">
+                            <iframe src="frame/edit.html"></iframe>
+                        </div>
+                    </div>
+                    <div class="one" id="tab2" style="display:none">
+                        <div id="about">
+                            <iframe src="frame/about.html"></iframe>
                         </div>
                     </div>
                 </div>
@@ -77,14 +74,13 @@
 <footer class="page-footer blue-grey">
     <div class="footer-copyright blue-grey darken-1">
         <div class="container">
-            <div class="row" style="margin-bottom: -10px;">
                 <div class="col s12 m10 offset-m3">
-                    <div class="row">
-                        © 2017 - <noscript>2018</noscript><script type="text/javascript">document.write(new Date().getFullYear());</script>The "malloc(0)" Group.
-                        <a class="grey-text text-lighten-2 right offset-m1" href="https://github.com/malloc-0/SketchMind/blob/master/LICENSE">GPL-3.0 License</a>
-                     </div>
+                    <div class="row" style="margin-bottom: 10px;">
+                        <a class="grey-text text-lighten-2 right offset-m2" href="https://github.com/malloc-0">
+                            © 2017 - <noscript>2018</noscript><script type="text/javascript">document.write(new Date().getFullYear());</script> The "malloc(0)" Group</a>
                 </div>
-            </div>
+                    <a class="grey-text text-lighten-2 right offset-m2" href="https://github.com/malloc-0/SketchMind/blob/master/LICENSE">Under the "GPL-3.0" License</a>
+                </div>
         </div>
     </div>
 </footer>
@@ -98,5 +94,14 @@
 <script type="text/javascript" src="node_modules/materialize-css/dist/js/materialize.min.js"></script>
 <script>
     M.AutoInit();
+
+    function switchTab(id){
+        for (i=0; i<3; i++)
+        {
+            document.getElementById("tab"+i).style.display="none";
+        }
+        document.getElementById("tab"+id).style.display="block";
+    }
+
 </script>
 </html>
