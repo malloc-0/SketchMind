@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="UTF-8">
     <title>SketchMind - 手绘思维导图</title>
@@ -13,6 +12,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!--  Android 5 Chrome Color-->
     <meta name="theme-color" content="#EEEEEE">
+
+    <style>
+        iframe {margin-left: 0px;margin-top: 0px;margin-right: 0px;margin-bottom: 0px;overflow: hidden;}
+    </style>
 </head>
 
 <body>
@@ -40,31 +43,25 @@
                 <img src="res/img/Main_300_300.png" width="100" height="100">
             </a></li>
         </ul>
-        <style>
-            html,body,iframe{width: 100%;height: 100%;padding: 0;margin: 0}
-            #start{width: 100%;height: 100%;}
-            #edit{width: 100%;height: 100%;}
-            #about{width: 100%;height: 100%;}
-            iframe{border: none;}
-        </style>
+
     </header>
     <main>
         <div class="container">
             <div class="row">
                 <div class="col s12 m8 offset-m2">
                     <div class="one" id="tab0" style="display:block">
-                            <div id="start">
-                                <iframe src="frame/start.html"></iframe>
-                            </div>
+                        <div id="start">
+                            <iframe src="frame/start.html" id="frame0" width='100%' height='100%' frameborder='0' onload="onStartFrameLoad()"></iframe>
+                        </div>
                     </div>
                     <div class="one" id="tab1" style="display:none">
                         <div id="edit">
-                            <iframe src="frame/edit.html"></iframe>
+                            <iframe src="frame/edit.html" id="frame1" width='100%' height='100%' frameborder='0' onload="onEditFrameLoad()"></iframe>
                         </div>
                     </div>
                     <div class="one" id="tab2" style="display:none">
                         <div id="about">
-                            <iframe src="frame/about.html"></iframe>
+                            <iframe src="frame/about.html" id="frame2" width='100%' height='100%' frameborder='0' onload="onAboutFrameLoad()"></iframe>
                         </div>
                     </div>
                 </div>
@@ -84,24 +81,11 @@
         </div>
     </div>
 </footer>
-
-
 </body>
 
 <!--  Scripts-->
 
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="node_modules/materialize-css/dist/js/materialize.min.js"></script>
-<script>
-    M.AutoInit();
-
-    function switchTab(id){
-        for (i=0; i<3; i++)
-        {
-            document.getElementById("tab"+i).style.display="none";
-        }
-        document.getElementById("tab"+id).style.display="block";
-    }
-
-</script>
+<script src="js/layout.js"></script>
 </html>
