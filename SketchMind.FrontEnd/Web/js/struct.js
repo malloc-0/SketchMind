@@ -1,6 +1,6 @@
 "use strict";
 // struct.ts
-exports.__esModule = true;
+export const __esModule = true;
 // This file contains basic data structures used in nodes and maps.
 // Copyright (c) 2018 "malloc(0)" Group. All rights reserved.
 var utils = require("./utils");

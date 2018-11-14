@@ -16,7 +16,7 @@ function onAboutFrameLoad() {
     document.getElementById("frame2").height = document.getElementById("frame2").contentWindow.document.body.scrollHeight;
 }
 
-function switchTab(id){
+function switchTab(id) {
     for (let i=0; i<3; i++)
     {
         document.getElementById("tab"+i).style.display="none";
@@ -24,13 +24,13 @@ function switchTab(id){
     document.getElementById("tab"+id).style.display="block";
     switch (id) {
         case 0:
-            onStartFrameLoad()
-            break
+            onStartFrameLoad();
+            break;
         case 1:
-            onEditFrameLoad()
-            break
+            onEditFrameLoad();
+            break;
         case 2:
-            onAboutFrameLoad()
-            break
+            onAboutFrameLoad();
+            break;
     }
 }
