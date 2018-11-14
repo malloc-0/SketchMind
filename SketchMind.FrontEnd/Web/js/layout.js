@@ -1,20 +1,22 @@
-M.AutoInit();
-
 
 function onStartFrameLoad() {
     document.getElementById("frame0").height = 0;
     document.getElementById("frame0").height = document.getElementById("frame0").contentWindow.document.body.scrollHeight;
+    console.log("start frame to " + document.getElementById("frame0").height);
 }
 
 function onEditFrameLoad() {
-    document.getElementById("frame1").height = 0;
-    document.getElementById("frame1").height = document.getElementById("frame1").contentWindow.document.body.scrollHeight;
+    let element = document.getElementById("frame1");
+
+    console.log("edit frame to " + document.getElementById("frame1").height);
 }
 
 function onAboutFrameLoad() {
     document.getElementById("frame2").height = 0;
     document.getElementById("frame2").height = document.getElementById("frame2").contentWindow.document.body.scrollHeight;
+    console.log("about frame to " + document.getElementById("frame2").height);
 }
+
 
 function switchTab(id) {
     for (let i=0; i<3; i++)

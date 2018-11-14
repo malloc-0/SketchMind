@@ -7,21 +7,36 @@
 <link type="text/css" rel="stylesheet" href="../node_modules/materialize-css/dist/css/materialize.min.css" media="screen,projection" />
 
 <link type="text/css" rel="stylesheet" href="../node_modules/jsmind/style/jsmind.css" />
+
+    <style type="text/css">
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        html,body{
+            height: 100%;
+            width: 100%;
+        }
+        .jsmind_container{
+            height: 100%;
+            width: 100%;
+        }
+    </style>
 </head>
 
 <body>
 <h1 class="header">编辑</h1>
-<div id="jsmind_container">
-
-</div>
-<a class="waves-effect waves-light blue-grey btn">OK</a>
+<div id="jsmind_container" height="auto" class="jsmind_container"></div>
+<a class="waves-effect waves-light blue-grey btn" onclick="window.parent.onEditFrameLoad()">OK</a>
 
 </body>
 
+
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="../js/mindmap.js"></script>
+<script type="text/javascript" src="../js/layout.js"></script>
 <script type="text/javascript" src="../node_modules/jsmind/js/jsmind.js"></script>
 <script type="text/javascript" src="../node_modules/jsmind/js/jsmind.draggable.js"></script>
 <script type="text/javascript" src="../node_modules/materialize-css/dist/js/materialize.min.js"></script>
-<script type="text/javascript" src="../js/struct.js"></script>
-<script type="text/javascript" src="../js/mindmap.js"></script>
+<script>init_Mind();</script>
 </html>

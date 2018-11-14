@@ -6,31 +6,8 @@
 
 import * as utils from "./utils";
 
-class Color {
-    r: number;
-    g: number;
-    b: number;
 
-    constructor(r: number, g: number, b: number) {
-        this.r = r;
-        this.g = g;
-        this.b = b;
-    }
-
-    to_hex(i: number) {
-        let s = i.toString(16);
-        if (s.length == 1) {
-            s = "0" + s;
-        }
-    }
-
-    print_hex() {
-        return "0x" + this.to_hex(this.r) + this.to_hex(this.g) + this.to_hex(this.b); 
-    }
-}
-
-
-enum Style {
+export enum Style {
     "primary",
     "warning",
     "danger",
@@ -77,7 +54,7 @@ class MapNode {
 }
 
 
-class MindMap {
+export class MindMap {
 
     title: string;
     // 图的标题
@@ -91,7 +68,7 @@ class MindMap {
     adj_mat: Array<Array<number>>;
     // 表示指向关系的邻接矩阵
 
-    accent: Color;
+    accent: Style;
     // 确定整体主题色。
 
     constructor(title: string) {

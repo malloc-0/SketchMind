@@ -4,38 +4,33 @@ export const __esModule = true;
 // This file contains basic data structures used in nodes and maps.
 // Copyright (c) 2018 "malloc(0)" Group. All rights reserved.
 var utils = require("./utils");
-var Color = /** @class */ (function () {
-    function Color(r, g, b) {
-        this.r = r;
-        this.g = g;
-        this.b = b;
-    }
-    Color.prototype.to_hex = function (i) {
-        var s = i.toString(16);
-        if (s.length == 1) {
-            s = "0" + s;
-        }
-    };
-    Color.prototype.print_hex = function () {
-        return "0x" + this.to_hex(this.r) + this.to_hex(this.g) + this.to_hex(this.b);
-    };
-    return Color;
-}());
-var Size;
-(function (Size) {
-    Size[Size["small"] = 0] = "small";
-    Size[Size["medium"] = 1] = "medium";
-    Size[Size["large"] = 2] = "large";
-})(Size || (Size = {}));
-;
+var Style;
+(function (Style) {
+    Style[Style["primary"] = 0] = "primary";
+    Style[Style["warning"] = 1] = "warning";
+    Style[Style["danger"] = 2] = "danger";
+    Style[Style["success"] = 3] = "success";
+    Style[Style["info"] = 4] = "info";
+    Style[Style["greensea"] = 5] = "greensea";
+    Style[Style["nephrite"] = 6] = "nephrite";
+    Style[Style["belizehole"] = 7] = "belizehole";
+    Style[Style["wisteria"] = 8] = "wisteria";
+    Style[Style["asphalt"] = 9] = "asphalt";
+    Style[Style["orange"] = 10] = "orange";
+    Style[Style["pumpkin"] = 11] = "pumpkin";
+    Style[Style["pomegranate"] = 12] = "pomegranate";
+    Style[Style["clouds"] = 13] = "clouds";
+    Style[Style["asbestos"] = 14] = "asbestos";
+})(Style = exports.Style || (exports.Style = {}));
 var MapNode = /** @class */ (function () {
-    function MapNode(cont, size) {
+    // 是否向右展开。默认为 yes。
+    // 目前不想用它
+    function MapNode(cont) {
         // 内容。
         this.expand_right = true;
         MapNode.last_id++;
         this.id = MapNode.last_id;
         this.content = cont;
-        this.size = size;
         this.parent_id = -1;
     }
     MapNode.last_id = 0;
@@ -140,3 +135,4 @@ var MindMap = /** @class */ (function () {
     };
     return MindMap;
 }());
+exports.MindMap = MindMap;

@@ -4,23 +4,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 // This file contains basic data structures used in nodes and maps.
 // Copyright (c) 2018 "malloc(0)" Group. All rights reserved.
 var utils = require("./utils");
-var Color = /** @class */ (function () {
-    function Color(r, g, b) {
-        this.r = r;
-        this.g = g;
-        this.b = b;
-    }
-    Color.prototype.to_hex = function (i) {
-        var s = i.toString(16);
-        if (s.length == 1) {
-            s = "0" + s;
-        }
-    };
-    Color.prototype.print_hex = function () {
-        return "0x" + this.to_hex(this.r) + this.to_hex(this.g) + this.to_hex(this.b);
-    };
-    return Color;
-}());
 var Style;
 (function (Style) {
     Style[Style["primary"] = 0] = "primary";
@@ -38,7 +21,7 @@ var Style;
     Style[Style["pomegranate"] = 12] = "pomegranate";
     Style[Style["clouds"] = 13] = "clouds";
     Style[Style["asbestos"] = 14] = "asbestos";
-})(Style || (Style = {}));
+})(Style = exports.Style || (exports.Style = {}));
 var MapNode = /** @class */ (function () {
     // 是否向右展开。默认为 yes。
     // 目前不想用它
@@ -152,3 +135,4 @@ var MindMap = /** @class */ (function () {
     };
     return MindMap;
 }());
+exports.MindMap = MindMap;
