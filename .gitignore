@@ -6,6 +6,9 @@
 # VS Code
 .vscode
 
+# MS Word
+~$*.docx
+
 # C extensions
 *.so
 
