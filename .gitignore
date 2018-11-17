@@ -6,6 +6,9 @@
 # VS Code
 .vscode
 
+# MS Word
+~$*.docx
+
 # C extensions
 *.so
 
@@ -105,3 +108,19 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+
+node_modules/
+/dist/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Editor directories and files
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+

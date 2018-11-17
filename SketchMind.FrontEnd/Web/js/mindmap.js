@@ -1,15 +1,10 @@
-"use strict";
-// utils.ts
-exports.__esModule = true;
-// This file contains some utilities we might use.
-// Copyright (c) 2018 "malloc(0)" Group. All rights reserved.
-exports.VERSION = "0.1";
-exports.EXAMPLE_MIND = {
+
+var mind = {
     /* 元数据，定义思维导图的名称、作者、版本等信息 */
     "meta": {
         "name": "Example",
         "author": "malloc(0)",
-        "version": exports.VERSION
+        "version": "0.1.0"
     },
     /* 数据格式声明 */
     "format": "node_array",
@@ -28,3 +23,15 @@ exports.EXAMPLE_MIND = {
         { "id": "11", "parentid": "7", "topic": "watchOS" },
     ]
 };
+
+var options = {
+    container: 'jsmind_container',
+    editable: true,
+    theme: 'orange'
+};
+
+
+function init_Mind() {
+    let jm = new jsMind(options);
+    jm.show(mind);
+}

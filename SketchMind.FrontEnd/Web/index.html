@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>SketchMind - 手绘思维导图</title>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="node_modules/materialize-css/dist/css/materialize.min.css" media="screen,projection" />
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--  Android 5 Chrome Color-->
+    <meta name="theme-color" content="#EEEEEE">
+
+    <style>
+        iframe {margin-left: 0px;margin-top: 0px;margin-right: 0px;margin-bottom: 0px;overflow: hidden;}
+    </style>
+</head>
+
+<body>
+    <main>
+            <div class="row">
+                <div class="col s3">
+                    <div class="container"><a href="#" data-target="nav-mobile" class="top-nav sidenav-trigger waves-effect waves-teal"><i
+                            class="material-icons">menu</i></a></div>
+                    <ul id="nav-mobile" class="sidenav sidenav-fixed">
+                        <li class="bold"><a onclick="switchTab(0)" class="collapsible-header waves-effect waves-cyan">开始</a></li>
+                        <li class="bold"><a onclick="switchTab(1)" class="collapsible-header waves-effect waves-cyan">编辑</a></li>
+                        <li class="no-padding">
+                            <ul class="collapsible collapsible-accordion">
+                                <li class="bold"><a class="collapsible-header waves-effect waves-cyan">输出</a>
+                                    <div class="collapsible-body">
+                                        <ul>
+                                            <li><a href="">为图片</a></li>
+                                            <li><a href="">为 Freemind (*.mm)</a></li>
+                                            <li><a href="">为 JSON</a></li>
+                                        </ul>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                        <!--<li class="bold"><a href="" class="collapsible-header waves-effect waves-cyan">关于<span data-badge-caption="v0.1.0" class="new badge blue-grey"></span></a></li>-->
+                        <li class="logo"><a id="logo-container" onclick="switchTab(2)" class="collapsible-header waves-effect waves-cyan">关于<span data-badge-caption="v0.1.0" class="new badge blue-grey"></span>
+                            <img src="res/img/Main_300_300.png" width="100" height="100">
+                        </a></li>
+                    </ul>
+                </div>
+                <div class="col s9">
+                    <div class="one" id="tab0" style="display:block">
+                        <div id="start">
+                            <iframe src="frame/start.html" id="frame0" width='100%' height='100%' frameborder='0' onload="onStartFrameLoad()"></iframe>
+                        </div>
+                    </div>
+                    <div class="one" id="tab1" style="display:none">
+                        <div id="edit">
+                            <iframe src="frame/edit.html" id="frame1" width='100%' height='100%' frameborder='0' onload="onEditFrameLoad()"></iframe>
+                        </div>
+                    </div>
+                    <div class="one" id="tab2" style="display:none">
+                        <div id="about">
+                            <iframe src="frame/about.html" id="frame2" width='100%' height='100%' frameborder='0' onload="onAboutFrameLoad()"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </main>
+<footer class="page-footer blue-grey">
+    <div class="footer-copyright blue-grey darken-1">
+        <div class="container">
+            <div class="row" style="margin-bottom: 10px;">
+                <div class="col s12 m10 offset-m3">
+                        <a class="grey-text text-lighten-2 right">
+                            © 2017 - <noscript>2018</noscript><script type="text/javascript">document.write(new Date().getFullYear());</script> The "malloc(0)" Group. Under "GPL-3.0" License.</a>
+                    </div>
+            </div>
+        </div>
+    </div>
+</footer>
+</body>
+
+<!--  Scripts-->
+
+<script src="js/require.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="node_modules/materialize-css/dist/js/materialize.min.js"></script>
+<script src="js/layout.js"></script>
+<script>
+    M.AutoInit();
+</script>
+</html>
