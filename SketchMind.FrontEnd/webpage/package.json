@@ -1,0 +1,15 @@
+{
+  "name": "sketch-mind",
+  "version": "0.1.0",
+  "main": "index.js",
+  "scripts": {
+    "debug" : "echo \" this is debug mode \"",
+    "build" : "echo \" this is build \"",
+    "release" : "echo \" this is release build \""
+  },
+  "dependencies": {
+    "materialize-css": "^1.0.0",
+    "jsmind": "^0.4.6"
+  },
+  "license": "GPL-v3"
+}
