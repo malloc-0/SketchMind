@@ -13,7 +13,7 @@
           <p>可以在这里对思维导图稍作调整。</p>
           <md-button class="md-raised md-primary" v-on:click="init_Mind()">浏览…</md-button>
           <md-layout md-align="center">
-            <div id="jsmind_container" style='height: 400px; width: 800px;' class="jsmind_container" editable="true"></div>
+            <div id="jsmind_container" style='height: auto; width: auto;' class="jsmind_container" editable="true"></div>
           </md-layout>
         </md-step>
         <md-step :md-disabled="!didUpload" md-label="导出"  md-message="EXPORT" md-button-back="返回" md-button-continue="完成">
@@ -32,11 +32,7 @@ import Vue from 'vue'
 import jsMind from 'jsmind'
 import "../node_modules/jsmind/style/jsmind.css"
 import '../node_modules/jsmind/js/jsmind.draggable'
-
 import './main'
-
-
-
 
 export default Vue.extend({
   data: function() {
