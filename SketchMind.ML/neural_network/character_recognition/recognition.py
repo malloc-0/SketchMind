@@ -15,7 +15,7 @@ model.add(Dense(500)) #隐藏层， 500
 model.add(Activation('tanh'))
 model.add(Dropout(0.5)) #50% dropout
 
-model.add(Dense(10)) #输出结果， 10
+model.add(Dense(8)) #输出结果， 10
 model.add(Activation('softmax'))
 # 详解
 # 通过model.add()增加模型的层数。其中Dense()设定该层的结构，第一个参数表示输出的个数，
