@@ -13,7 +13,13 @@
           <p>可以在这里对思维导图稍作调整。</p>
           <md-button class="md-raised md-primary" v-on:click="init_Mind()">浏览…</md-button>
           <md-layout md-align="center">
-            <div id="jsmind_container" style='height: auto; width: auto;' class="jsmind_container" editable="true"></div>
+            <div id="app">
+              <mindmap
+                :nodes="nodes"
+                :connections="connections"
+                :editable="true"
+              ></mindmap>
+            </div>
           </md-layout>
         </md-step>
         <md-step :md-disabled="!didUpload" md-label="导出"  md-message="EXPORT" md-button-back="返回" md-button-continue="完成">
@@ -29,55 +35,24 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import jsMind from 'jsmind'
-import "../node_modules/jsmind/style/jsmind.css"
-import '../node_modules/jsmind/js/jsmind.draggable'
 import './main'
+// You need a specific loader for CSS files like https://github.com/webpack/css-loader
+
+import map from "./sprite/map";
+
 
 export default Vue.extend({
   data: function() {
     return {
       didUpload: true,
-      mind: {
-        /* 元数据，定义思维导图的名称、作者、版本等信息 */
-        "meta": {
-          "name": "Example",
-          "author": "malloc(0)",
-          "version": "0.1.0"
-        },
-        /* 数据格式声明 */
-        "format": "node_array",
-        /* 数据内容 */
-        "data": [
-          { "id": "1", "isroot": true, "topic": "Microsoft" },
-          { "id": "2", "parentid": "1", "topic": "Windows", "direction": "left" },
-          { "id": "3", "parentid": "1", "topic": "Office" },
-          { "id": "4", "parentid": "1", "topic": "Visual Studio" },
-          { "id": "5", "parentid": "1", "topic": "Visual Studio Code" },
-          { "id": "6", "parentid": "1", "topic": "Xbox" },
-          { "id": "7", "isroot": true, "topic": "Apple", "expanded": false, "direction": "right" },
-          { "id": "8", "parentid": "7", "topic": "macOS" },
-          { "id": "9", "parentid": "7", "topic": "iOS" },
-          { "id": "10", "parentid": "7", "topic": "tvOS", "direction": "right" },
-          { "id": "11", "parentid": "7", "topic": "watchOS" },
-        ]
-      },
-      options: {
-        container: 'jsmind_container',
-        editable: true,
-        theme: 'orange'
-      }
+      map
     }
-  },
-  methods: {
-    init_Mind() {
-      let jm = new jsMind(this.$data.options);
-      jm.show(this.$data.mind);
-      alert("Tried init mind")
-    },
   }
 })
+
+
 </script>
+
 <style>
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
