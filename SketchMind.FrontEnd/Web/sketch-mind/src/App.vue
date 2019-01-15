@@ -1,46 +1,92 @@
 <template>
   <div id="app">
-    <img width="150" height="150" src="./assets/logo.png">
-    <h1>SketchMind</h1>
-    <h3>手绘思维导图转换</h3>
-    <md-layout md-align="center">
-      <md-stepper>
-        <md-step :md-editable="true" md-label="上传" :md-error="!didUpload" :md-continue="didUpload" md-message="UPLOAD"  md-button-back="返回" md-button-continue="继续">
-          <p>请上传一张图片。</p>
-          <md-button class="md-raised md-primary">浏览…</md-button>
-        </md-step>
-        <md-step :md-disabled="!didUpload" md-label="调整"  md-message="ADJUST" md-button-back="返回" md-button-continue="继续">
-          <p>可以在这里对思维导图稍作调整。</p>
-          <md-button class="md-raised md-primary" v-on:click="init_Mind()">浏览…</md-button>
-          <md-layout md-align="center">
-              <mindmap
-                :nodes="nodes"
-                :connections="connections"
-                :editable="true"
-              ></mindmap>
-          </md-layout>
-        </md-step>
-        <md-step :md-disabled="!didUpload" md-label="导出"  md-message="EXPORT" md-button-back="返回" md-button-continue="完成">
-          <p>导出为图片／FreeMind 格式。</p>
-        </md-step>
-      </md-stepper>
-    </md-layout>
-    <md-bottom-bar :md-shift="true">
-      <md-bottom-bar-item onclick='window.open("https://github.com/malloc-0/SketchMind")' md-icon="code">GitHub 页面</md-bottom-bar-item>
-    </md-bottom-bar>
+    <div style="position:relative;padding-bottom:55px;width:100%;height:auto">
+      <img
+        width="150"
+        height="150"
+        src="./assets/logo.png"
+      >
+      <h1>SketchMind</h1>
+      <h3>手绘思维导图转换</h3>
+
+      <md-layout md-align="center">
+
+        <md-stepper>
+          <md-step
+            :md-editable="true"
+            md-label="上传"
+            :md-error="!didUpload"
+            :md-continue="didUpload"
+            md-message="UPLOAD"
+            md-button-back="返回"
+            md-button-continue="继续"
+          >
+            <p>请上传一张图片。</p>
+            <md-button class="md-raised md-primary">浏览…</md-button>
+          </md-step>
+          <md-step
+            :md-disabled="!didUpload"
+            md-label="调整"
+            md-message="ADJUST"
+            md-button-back="返回"
+            md-button-continue="继续"
+          >
+            <p>可以在这里对思维导图稍作调整。</p>
+            <md-button
+              class="md-raised md-primary"
+              v-on:click="init_Mind()"
+            >浏览…</md-button>
+            <md-layout md-align="center">
+              <div style="overflow:hidden;width:100%;height:500px">
+                <mindmap
+                  :nodes="nodes"
+                  :connections="connections"
+                  :editable="true"
+                ></mindmap>
+              </div>
+
+            </md-layout>
+          </md-step>
+          <md-step
+            :md-disabled="!didUpload"
+            md-label="导出"
+            md-message="EXPORT"
+            md-button-back="返回"
+            md-button-continue="完成"
+          >
+            <p>导出为图片／FreeMind 格式。</p>
+          </md-step>
+        </md-stepper>
+
+      </md-layout>
+    </div>
+    <div>
+      <md-bottom-bar
+        :md-shift="true"
+        style="position:fixed;bottom:0;z-index: 10;"
+      >
+        <md-bottom-bar-item
+          onclick='window.open("https://github.com/malloc-0/SketchMind")'
+          md-icon="code"
+        >GitHub 页面</md-bottom-bar-item>
+      </md-bottom-bar>
+    </div>
+
   </div>
 </template>
 
 <script>
 import Vue from 'vue'
 import './main'
+import VueMindMap from 'vue-mindmap'
 
 let VueMaterial = require('vue-material');
 
 Vue.use(VueMaterial);
+Vue.use(VueMindMap);
 
 export default Vue.extend({
-  data: function() {
+  data: function () {
     return {
       didUpload: true,
       title: 'learn anything - programming - programming languages - python',
@@ -58,184 +104,184 @@ export default Vue.extend({
           category: 'reddit',
           color: 'rgba(255, 189, 10, 1.0)'
         },
-          {
-            text: 'source',
-            note: 'original python implementation in c, compiles python code into byte code and interprets the byte code in a evaluation loop',
-            url: 'https://github.com/python/cpython',
-            fx: 176.083777747024,
-            fy: -625.1641376795345,
-            nodes: [],
-            category: 'github',
-            color: 'rgba(36, 170, 255, 1.0)'
-          }
+        {
+          text: 'source',
+          note: 'original python implementation in c, compiles python code into byte code and interprets the byte code in a evaluation loop',
+          url: 'https://github.com/python/cpython',
+          fx: 176.083777747024,
+          fy: -625.1641376795345,
+          nodes: [],
+          category: 'github',
+          color: 'rgba(36, 170, 255, 1.0)'
+        }
         ],
         category: 'wiki'
       },
-        {
-          text: 'help',
-          url: '',
-          fx: 154.3247731601375,
-          fy: -429.73700786748157,
-          nodes: [{
-            text: 'awesome python',
-            url: 'https://github.com/vinta/awesome-python',
-            fx: 291.3247731601375,
-            fy: -546.2370078674815,
-            nodes: [],
-            category: 'github',
-            color: 'rgba(175, 54, 242, 1.0)'
-          },
-            {
-              text: 'awesome asyncio',
-              url: 'https://github.com/timofurrer/awesome-asyncio',
-              fx: 291.3247731601375,
-              fy: -506.23700786748157,
-              nodes: [],
-              category: 'github',
-              color: 'rgba(36, 170, 255, 1.0)'
-            },
-            {
-              text: 'python data model',
-              url: 'https://docs.python.org/3/reference/datamodel.html',
-              fx: 291.3247731601375,
-              fy: -466.23700786748157,
-              nodes: [],
-              color: 'rgba(255, 189, 10, 1.0)'
-            },
-            {
-              text: 'python testing',
-              url: 'http://pythontesting.net/framework/pytest/pytest-introduction/',
-              fx: 291.3247731601375,
-              fy: -432.23700786748157,
-              nodes: [],
-              category: 'free book',
-              color: 'rgba(34, 205, 224, 1.0)'
-            },
-            {
-              text: 'scientific python cheat sheet',
-              url: 'https://ipgp.github.io/scientific_python_cheat_sheet/',
-              fx: 291.3247731601375,
-              fy: -392.23700786748157,
-              nodes: [],
-              color: 'rgba(209, 21, 88, 1.0)'
-            },
-            {
-              text: 'structuring your project',
-              url: 'http://python-guide-pt-br.readthedocs.io/en/latest/writing/structure/',
-              fx: 291.3247731601375,
-              fy: -358.23700786748157,
-              nodes: [],
-              color: 'rgba(49, 187, 71, 1.0)'
-            },
-            {
-              text: 'style guide for python code',
-              url: 'https://www.python.org/dev/peps/pep-0008/',
-              fx: 291.3247731601375,
-              fy: -324.23700786748157,
-              nodes: [],
-              color: 'rgba(175, 54, 242, 1.0)'
-            },
-            {
-              text: 'cpython internals  ️',
-              url: 'http://pgbovine.net/cpython-internals.htm',
-              fx: 291.3247731601375,
-              fy: -290.23700786748157,
-              nodes: [],
-              category: 'article',
-              color: 'rgba(36, 170, 255, 1.0)'
-            }
-          ]
-        },
-        {
-          text: 'articles',
-          url: '',
-          fx: 455.7839253819375,
-          fy: -183.5539283546699,
-          nodes: [{
-            text: '16: the history behind the decision to move python to github  ️',
-            url: 'https://snarky.ca/the-history-behind-the-decision-to-move-python-to-github/',
-            fx: 617.7839253819375,
-            fy: -245.0539283546699,
-            nodes: [],
-            category: 'article',
-            color: 'rgba(175, 54, 242, 1.0)'
-          },
-            {
-              text: '15: a modern python development toolchain  ️',
-              url: 'http://www.chriskrycho.com/2015/a-modern-python-development-toolchain.html',
-              fx: 617.7839253819375,
-              fy: -183.0539283546699,
-              nodes: [],
-              category: 'article',
-              color: 'rgba(36, 170, 255, 1.0)'
-            },
-            {
-              text: '17: pythons instance, class, and static methods demystified',
-              url: 'https://realpython.com/blog/python/instance-class-and-static-methods-demystified/',
-              fx: 617.7839253819375,
-              fy: -121.05392835466989,
-              nodes: [],
-              category: 'article',
-              color: 'rgba(255, 189, 10, 1.0)'
-            }
-          ]
-        },
-        {
-          text: 'basics',
-          note: '',
-          url: '',
-          fx: -98.5231997717085,
-          fy: -60.07462866512333,
-          nodes: [{
-            text: '1. the python tutorial',
-            url: 'https://docs.python.org/3/tutorial/',
-            fx: 83.4768002282915,
-            fy: -96.57462866512333,
-            nodes: [],
-            color: 'rgba(255, 189, 10, 1.0)'
-          },
-            {
-              text: '1. dive into python 3',
-              url: 'http://www.diveintopython3.net',
-              fx: 83.4768002282915,
-              fy: -62.57462866512333,
-              nodes: [],
-              category: 'free book',
-              color: 'rgba(175, 54, 242, 1.0)'
-            },
-            {
-              text: '1. automate the boring stuff with python',
-              url: 'https://automatetheboringstuff.com/',
-              fx: 83.4768002282915,
-              fy: -22.574628665123328,
-              nodes: [],
-              category: 'free book',
-              color: 'rgba(36, 170, 255, 1.0)'
-            }
-          ]
-        },
-        {
-          text: 'package manager',
-          url: 'http://www.wikiwand.com/en/Package_manager',
-          fx: -346.2056231217888,
-          fy: 39.035120728630204,
+      {
+        text: 'help',
+        url: '',
+        fx: 154.3247731601375,
+        fy: -429.73700786748157,
+        nodes: [{
+          text: 'awesome python',
+          url: 'https://github.com/vinta/awesome-python',
+          fx: 291.3247731601375,
+          fy: -546.2370078674815,
           nodes: [],
-          category: 'wiki'
+          category: 'github',
+          color: 'rgba(175, 54, 242, 1.0)'
         },
         {
-          text: 'python libraries  ️',
-          fx: -78.69331502906573,
-          fy: 100.14771605920942,
+          text: 'awesome asyncio',
+          url: 'https://github.com/timofurrer/awesome-asyncio',
+          fx: 291.3247731601375,
+          fy: -506.23700786748157,
           nodes: [],
-          category: 'mindmap'
+          category: 'github',
+          color: 'rgba(36, 170, 255, 1.0)'
         },
         {
-          text: 'pip',
-          url: 'https://pypi.python.org/pypi/pip',
-          fx: -317.77054724755226,
-          fy: 153.56934975958518,
-          nodes: []
+          text: 'python data model',
+          url: 'https://docs.python.org/3/reference/datamodel.html',
+          fx: 291.3247731601375,
+          fy: -466.23700786748157,
+          nodes: [],
+          color: 'rgba(255, 189, 10, 1.0)'
+        },
+        {
+          text: 'python testing',
+          url: 'http://pythontesting.net/framework/pytest/pytest-introduction/',
+          fx: 291.3247731601375,
+          fy: -432.23700786748157,
+          nodes: [],
+          category: 'free book',
+          color: 'rgba(34, 205, 224, 1.0)'
+        },
+        {
+          text: 'scientific python cheat sheet',
+          url: 'https://ipgp.github.io/scientific_python_cheat_sheet/',
+          fx: 291.3247731601375,
+          fy: -392.23700786748157,
+          nodes: [],
+          color: 'rgba(209, 21, 88, 1.0)'
+        },
+        {
+          text: 'structuring your project',
+          url: 'http://python-guide-pt-br.readthedocs.io/en/latest/writing/structure/',
+          fx: 291.3247731601375,
+          fy: -358.23700786748157,
+          nodes: [],
+          color: 'rgba(49, 187, 71, 1.0)'
+        },
+        {
+          text: 'style guide for python code',
+          url: 'https://www.python.org/dev/peps/pep-0008/',
+          fx: 291.3247731601375,
+          fy: -324.23700786748157,
+          nodes: [],
+          color: 'rgba(175, 54, 242, 1.0)'
+        },
+        {
+          text: 'cpython internals  ️',
+          url: 'http://pgbovine.net/cpython-internals.htm',
+          fx: 291.3247731601375,
+          fy: -290.23700786748157,
+          nodes: [],
+          category: 'article',
+          color: 'rgba(36, 170, 255, 1.0)'
         }
+        ]
+      },
+      {
+        text: 'articles',
+        url: '',
+        fx: 455.7839253819375,
+        fy: -183.5539283546699,
+        nodes: [{
+          text: '16: the history behind the decision to move python to github  ️',
+          url: 'https://snarky.ca/the-history-behind-the-decision-to-move-python-to-github/',
+          fx: 617.7839253819375,
+          fy: -245.0539283546699,
+          nodes: [],
+          category: 'article',
+          color: 'rgba(175, 54, 242, 1.0)'
+        },
+        {
+          text: '15: a modern python development toolchain  ️',
+          url: 'http://www.chriskrycho.com/2015/a-modern-python-development-toolchain.html',
+          fx: 617.7839253819375,
+          fy: -183.0539283546699,
+          nodes: [],
+          category: 'article',
+          color: 'rgba(36, 170, 255, 1.0)'
+        },
+        {
+          text: '17: pythons instance, class, and static methods demystified',
+          url: 'https://realpython.com/blog/python/instance-class-and-static-methods-demystified/',
+          fx: 617.7839253819375,
+          fy: -121.05392835466989,
+          nodes: [],
+          category: 'article',
+          color: 'rgba(255, 189, 10, 1.0)'
+        }
+        ]
+      },
+      {
+        text: 'basics',
+        note: '',
+        url: '',
+        fx: -98.5231997717085,
+        fy: -60.07462866512333,
+        nodes: [{
+          text: '1. the python tutorial',
+          url: 'https://docs.python.org/3/tutorial/',
+          fx: 83.4768002282915,
+          fy: -96.57462866512333,
+          nodes: [],
+          color: 'rgba(255, 189, 10, 1.0)'
+        },
+        {
+          text: '1. dive into python 3',
+          url: 'http://www.diveintopython3.net',
+          fx: 83.4768002282915,
+          fy: -62.57462866512333,
+          nodes: [],
+          category: 'free book',
+          color: 'rgba(175, 54, 242, 1.0)'
+        },
+        {
+          text: '1. automate the boring stuff with python',
+          url: 'https://automatetheboringstuff.com/',
+          fx: 83.4768002282915,
+          fy: -22.574628665123328,
+          nodes: [],
+          category: 'free book',
+          color: 'rgba(36, 170, 255, 1.0)'
+        }
+        ]
+      },
+      {
+        text: 'package manager',
+        url: 'http://www.wikiwand.com/en/Package_manager',
+        fx: -346.2056231217888,
+        fy: 39.035120728630204,
+        nodes: [],
+        category: 'wiki'
+      },
+      {
+        text: 'python libraries  ️',
+        fx: -78.69331502906573,
+        fy: 100.14771605920942,
+        nodes: [],
+        category: 'mindmap'
+      },
+      {
+        text: 'pip',
+        url: 'https://pypi.python.org/pypi/pip',
+        fx: -317.77054724755226,
+        fy: 153.56934975958518,
+        nodes: []
+      }
       ],
       connections: [{
         source: 'python',
@@ -245,46 +291,46 @@ export default Vue.extend({
           y: 299.545
         }
       },
-        {
-          source: 'help',
-          target: 'python',
-          curve: {
-            x: -78.1206,
-            y: -114.714
-          }
-        },
-        {
-          source: 'basics',
-          target: 'python libraries  ️',
-          curve: {
-            x: 29.6649,
-            y: 80.1111
-          }
-        },
-        {
-          source: 'basics',
-          target: 'package manager',
-          curve: {
-            x: -103.841,
-            y: 49.5548
-          }
-        },
-        {
-          source: 'package manager',
-          target: 'pip',
-          curve: {
-            x: -19.7824,
-            y: 57.2671
-          }
-        },
-        {
-          source: 'articles',
-          target: 'help',
-          curve: {
-            x: -238.287,
-            y: -54.4818
-          }
+      {
+        source: 'help',
+        target: 'python',
+        curve: {
+          x: -78.1206,
+          y: -114.714
         }
+      },
+      {
+        source: 'basics',
+        target: 'python libraries  ️',
+        curve: {
+          x: 29.6649,
+          y: 80.1111
+        }
+      },
+      {
+        source: 'basics',
+        target: 'package manager',
+        curve: {
+          x: -103.841,
+          y: 49.5548
+        }
+      },
+      {
+        source: 'package manager',
+        target: 'pip',
+        curve: {
+          x: -19.7824,
+          y: 57.2671
+        }
+      },
+      {
+        source: 'articles',
+        target: 'help',
+        curve: {
+          x: -238.287,
+          y: -54.4818
+        }
+      }
       ]
     }
   }
@@ -295,7 +341,7 @@ export default Vue.extend({
 
 <style>
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -305,3 +351,4 @@ export default Vue.extend({
 </style>
 
 <style src="../node_modules/vue-material/dist/vue-material.css"></style>
+<style src="../node_modules/vue-mindmap/dist/vue-mindmap.css"></style>
