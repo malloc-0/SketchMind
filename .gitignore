@@ -6,7 +6,22 @@
 # 陈静瑜的学习图片
 *.png
 *.jpg
+#flask要求配置
 
+venv/
+
+*.pyc
+__pycache__/
+
+instance/
+
+.pytest_cache/
+.coverage
+htmlcov/
+
+dist/
+build/
+*.egg-info/
 # VS Code
 .vscode
 
