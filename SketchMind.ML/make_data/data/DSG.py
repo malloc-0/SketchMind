@@ -76,22 +76,26 @@ def round(p1,p2,mistake):
 
 class Node:
     root=None
-    def __init__(self,father=None,data=None,children=None):
-        self.father=father
+    def __init__(self,data=None,children=None):
+        # self.father=father
         self.data=data
         self.children=children
     def Generate(self,A,inroot):
-        self.root.father=None
+        # self.root.father=None
         self.root.children=A[inroot]
         self.root.data=inroot
         Queue=[]
         Queue += A[inroot]
+        # temp_father=inroot
         
         while Queue.size()!=0:
             temp_name=Queue[0]
+            temp = Node(temp_name,A[temp_name])
             del Queue[0]
-            temp = Node(None,temp_name,A[temp_name])
             Queue += A[temp_name]
+            # temp_father=temp_name
+    def Print(self):
+        Queue[0]
 
 
 
