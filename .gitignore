@@ -3,9 +3,7 @@
 .AppleDouble
 .LSOverride
 
-# 陈静瑜的学习图片
-*.png
-*.jpg
+
 #flask要求配置
 
 venv/
