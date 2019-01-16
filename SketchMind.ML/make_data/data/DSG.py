@@ -61,8 +61,8 @@ from math import cos,sin
 
 #假装识别出了一切（想要啥有啥），生成一个图
 #我们识别了所有的node及其内容，位置
-Node_dic={"string1":[300,300],"string2":[200,200],"string3":[400,200],"string4":[100,100],"string5":[200,100],
-          "string6":[300,100],"string7":[400,100],"string8":[500,100]  }
+Node_dic={"输出":[300,300],"物理输出":[200,200],"魔法输出":[400,200],"黑暗游侠":[100,100],"恐怖利刃":[200,100],
+          "混沌骑士":[300,100],"莱恩":[400,100],"痛苦女王":[500,100]  }
 #我们识别了所有的edge及其角度，长度（切割图片对角线的长度），位置
 Edge_dic={"E1":[0.8,70,[250,250]],"E2":[2.4,70,[350,250]],"E3":[0.8,70,[150,150]],"E4":[1.6,70,[200,150]],
 "E5":[2.4,70,[250,150]],"E6":[1.6,70,[400,150]],"E7":[2.4,70,[450,150]],
@@ -73,12 +73,9 @@ Tree_data_json=""
 
 def round(p1,p2):
     if(abs(p1[0]-p2[0]) < mistake  and abs(p1[1]-p2[1]) < mistake):
-        # print ("ok")
         return True
     return False
-
 class MindMapping:
-    
     relationship=[]       #[[A,b],[b,c]]
     R_table={}        #A:[b,c,d]
     root=""
@@ -91,7 +88,6 @@ class MindMapping:
         self.get_root()    
     def get_relationship(self):
         for edge in self.edge_l:
-            # L=edge[2]
             A=self.edge_l[edge][0]
             L=self.edge_l[edge][1]
             pos=self.edge_l[edge][2]
@@ -111,7 +107,6 @@ class MindMapping:
                     end=node
             if(start != [0,0] and end != [0,0]):
                 self.relationship.append([start,end])
- 
     def get_table(self):
         for N in self.node_l:
             self.R_table[N]=[]
@@ -129,13 +124,11 @@ class MindMapping:
             if(isRoot):
                 self.root = N
                 return
-
-               
     def Print(self):
         #找到root                 T
         #深度优先遍历              T
-        #把自己的名字打出来
-        #把{},[]打出来
+        #把自己的名字打出来           T
+        #把{},[]打出来        T
         temp=self.root
         global Tree_data_json
         Tree_data_json=Tree_data_json+"{\"name\":\""+self.root+"\""
@@ -157,23 +150,12 @@ class MindMapping:
             Tree_data_json=Tree_data_json+"}"
         else:
             Tree_data_json+="}"
-            # Tree_data_json+=","
-        # Tree_data_json=Tree_data_json+"]"
         return
 
 A=MindMapping(Node_dic,Edge_dic)
 A.generate()
 A.Print()
-
-# print (Tree_data_json)
-
-
-
-            # data: [
-            #        {"name":"第一级1","children":[{"name":"第二级1"},{"name":"第二级2"},{"name":"第二级3"}]}
-            #       ]
-json_data="data:["+Tree_data_json+"]"
-
+json_data="data:[\n                  "+Tree_data_json+"\n]"
 json_before='''option = {
     title : {
         text: '冰桶挑战'
@@ -229,7 +211,6 @@ json_after='''
         }
     ]
 };'''
-
 final_json=json_before+json_data+json_after        
 print (final_json)
 
