@@ -22,7 +22,8 @@
             md-button-continue="继续"
           >
             <p>请上传一张图片。</p>
-            <md-button class="md-raised md-primary">浏览…</md-button>
+            <input id="fileopener" hidden="true" type="file" />
+            <md-button class="md-raised md-primary" v-on:click=openFileBrowser>浏览…</md-button>
           </md-step>
           <md-step
             :md-disabled="!didUpload"
@@ -32,10 +33,7 @@
             md-button-continue="继续"
           >
             <p>可以在这里对思维导图稍作调整。</p>
-            <md-button
-              class="md-raised md-primary"
-              v-on:click="init_Mind()"
-            >浏览…</md-button>
+
             <md-layout md-align="center">
               <div style="overflow:hidden;width:100%;height:500px">
                 <mindmap
@@ -76,6 +74,7 @@
 </template>
 
 <script>
+
 import Vue from 'vue'
 import './main'
 import VueMindMap from 'vue-mindmap'
@@ -86,9 +85,16 @@ Vue.use(VueMaterial);
 Vue.use(VueMindMap);
 
 export default Vue.extend({
+  methods: {
+    openFileBrowser() {
+      var op = document.getElementById('fileopener');
+      op.click();
+      this.$data.didUpload = true;
+    }
+  },
   data: function () {
     return {
-      didUpload: true,
+      didUpload: false,
       title: 'learn anything - programming - programming languages - python',
       nodes: [{
         text: 'python',
